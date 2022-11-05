@@ -22,6 +22,11 @@ public class Prediction {
     public static final String STATUS_IN_PROGRESS = "in_progress";
     public static final String STATUS_FINISHED = "finished";
     private String status = STATUS_WAITING;
+
+    public Prediction(){
+
+    }
+
     public void setStatusInProgress(){
         this.status = STATUS_IN_PROGRESS;
     }
@@ -29,7 +34,14 @@ public class Prediction {
         this.status= STATUS_FINISHED;
     }
 
+    public String getStatus() { return toString(); }
+
     public Prediction toPrediction(){
         return new Prediction();
+    }
+
+    @Override
+    public String toString(){
+        return "ID: " + this.getId() + " Status: " + this.getStatus();
     }
 }
