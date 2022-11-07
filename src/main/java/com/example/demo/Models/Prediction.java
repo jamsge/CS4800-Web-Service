@@ -23,22 +23,32 @@ public class Prediction {
     public static final String STATUS_FINISHED = "finished";
     private String status = STATUS_WAITING;
 
-    public Prediction(){
+    public Prediction(double avgTemperature, double avgHumidity, double avgRainfall30, double avgRainfall60, double avgRainfall90){
+        this.avgTemperature = avgTemperature;
+        this.avgHumidity = avgHumidity;
+        this.avgRainfall30 = avgRainfall30;
+        this.avgRainfall60 = avgRainfall60;
+        this.avgRainfall90 = avgRainfall90;
+        date = getDate();
+    }
 
+    public Prediction(Prediction pr){
+        pr.avgTemperature = avgTemperature;
+        pr.avgHumidity = avgHumidity;
+        pr.avgRainfall30 = avgRainfall30;
+        pr.avgRainfall60 = avgRainfall60;
+        pr.avgRainfall90 = avgRainfall90;
+        date = getDate();
     }
 
     public void setStatusInProgress(){
         this.status = STATUS_IN_PROGRESS;
     }
     public void setStatusFinished(){
-        this.status= STATUS_FINISHED;
+        this.status = STATUS_FINISHED;
     }
 
     public String getStatus() { return toString(); }
-
-    public Prediction toPrediction(){
-        return new Prediction();
-    }
 
     @Override
     public String toString(){
