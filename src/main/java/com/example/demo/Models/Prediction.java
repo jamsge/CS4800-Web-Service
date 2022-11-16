@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class Prediction {
 
+    private static final int INF = -9999;
     @NotEmpty(message="A prediction date is required.")
     private Date date;
 
@@ -23,6 +24,15 @@ public class Prediction {
     public static final String STATUS_FINISHED = "finished";
     private String status = STATUS_WAITING;
 
+    public Prediction(){
+        this.avgTemperature = INF;
+        this.avgHumidity = INF;
+        this.avgRainfall30 = INF;
+        this.avgRainfall60 = INF;
+        this.avgRainfall90 = INF;
+        date = getDate();
+    }
+
     public Prediction(double avgTemperature, double avgHumidity, double avgRainfall30, double avgRainfall60, double avgRainfall90){
         this.avgTemperature = avgTemperature;
         this.avgHumidity = avgHumidity;
@@ -33,12 +43,12 @@ public class Prediction {
     }
 
     public Prediction(Prediction pr){
-        pr.avgTemperature = avgTemperature;
-        pr.avgHumidity = avgHumidity;
-        pr.avgRainfall30 = avgRainfall30;
-        pr.avgRainfall60 = avgRainfall60;
-        pr.avgRainfall90 = avgRainfall90;
-        date = getDate();
+        this.avgTemperature = pr.avgTemperature;
+        this.avgHumidity = pr.avgHumidity;
+        this.avgRainfall30 = pr.avgRainfall30;
+        this.avgRainfall60 = pr.avgRainfall60;
+        this.avgRainfall90 = pr.avgRainfall90;
+        this.date = getDate();
     }
 
     public void setStatusInProgress(){
@@ -47,11 +57,11 @@ public class Prediction {
     public void setStatusFinished(){
         this.status = STATUS_FINISHED;
     }
-
-    public String getStatus() { return toString(); }
-
-    @Override
-    public String toString(){
-        return "ID: " + this.getId() + " Status: " + this.getStatus();
-    }
+//
+//    public String getStatus() { return this.toString(); }
+//
+//    @Override
+//    public String toString(){
+//        return "ID: " + this.getId() + " Status: " + this.getStatus();
+//    }
 }
