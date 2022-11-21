@@ -2,7 +2,6 @@ package com.example.demo;
 
 import com.example.demo.Models.Prediction;
 import org.springframework.web.bind.annotation.*;
-import org.json.*;
 
 import java.util.*;
 //import static java.util.Map.entry;
@@ -11,9 +10,15 @@ import java.util.*;
 @RestController
 public class Controller {
 
+    private final PredictionRepository repository;
+
     private static Deque<Prediction> InboundQueue = new ArrayDeque<Prediction>() {};
-    private static Map<String, JSONObject> OutboundResults = Map.ofEntries(
-    );
+
+    private static Map<String, Prediction> OutboundResults = Map.ofEntries();
+
+    public Controller(PredictionRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping("/")
     public String index() {
@@ -30,10 +35,18 @@ public class Controller {
         return newPredicition;
     }
 
-    // retrieve prediction result status
-    @GetMapping("/result")
-    public String getPredictionResult() {
-        return "Greetings from Spring Boot!";
+//    Most Likely not needed: retrieve prediction result status
+//    @PostMapping("/submitResult")
+//    public String submitPredictionResult(@RequestBody Prediction wfPredict) {
+//        OutboundResults.put(wfPredict.getId(), wfPredict);
+//        return "";
+//    }
+
+//  For the AI to submit its computed Prediction result.
+    @GetMapping(path = "/predictions/{id}", produces = {"application/json"})
+    public Prediction submitPredictionResult(@PathVariable Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new PredictionNotFoundException(id));
     }
 
     // Check queue for next Prediction and returns JSON for item at the top of Stack
