@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20180130</version>
+			<version>20220924</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -41,10 +41,7 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-		</dependency>
+
 	</dependencies>
 
 	<build>
