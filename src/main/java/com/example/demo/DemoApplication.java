@@ -10,8 +10,7 @@ import java.io.IOException;
 public class DemoApplication {
 
 	public static void main(String[] args) throws IOException {
-		WildfirePrediction.loadJsonToJsonObject();
+//		WildfirePrediction.loadJsonToJsonObject();
 		SpringApplication.run(DemoApplication.class, args);
 	}
-
 }
